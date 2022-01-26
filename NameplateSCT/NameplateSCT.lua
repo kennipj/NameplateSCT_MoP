@@ -533,20 +533,20 @@ local missedSpellEvents = {
 }
 
 local BITMASK_PETS = COMBATLOG_OBJECT_TYPE_PET + COMBATLOG_OBJECT_TYPE_GUARDIAN
-function NameplateSCT:COMBAT_LOG_EVENT_UNFILTERED(_, _, clueevent, srcGUID, srcName, srcFlags, dstGUID, dstName, _, ...)
+function NameplateSCT:COMBAT_LOG_EVENT_UNFILTERED(_, _, clueevent, _, srcGUID, srcName, srcFlags, _, dstGUID, dstName, _, ...)
 	if NameplateSCT.db.global.personalOnly and NameplateSCT.db.global.personal and playerGUID ~= dstGUID then
 		return
 	end -- Cancel out any non player targetted abilities if you have personalSCT only enabled
 
 	if playerGUID == srcGUID or (NameplateSCT.db.global.personal and playerGUID == dstGUID) then -- Player events
 		if damageSpellEvents[clueevent] then
-			local spellId, spellName, school, amount, _, _, _, _, _, critical, _, _ = ...
+			local _, spellId, spellName, school, amount, _, _, _, _, _, critical, _, _ = ...
 			self:DamageEvent(dstGUID, spellName, amount, school, critical, spellId)
 		elseif clueevent == "SWING_DAMAGE" then
-			local amount, _, _, _, _, _, critical, _, _ = ...
+			local _, amount, _, _, _, _, _, critical, _, _ = ...
 			self:DamageEvent(dstGUID, AutoAttack, amount, 1, critical, 6603)
 		elseif missedSpellEvents[clueevent] then
-			local spellId, spellName, school, missType = ...
+			local _, spellId, spellName, school, missType = ...
 			self:MissEvent(dstGUID, spellName, missType, spellId)
 		elseif clueevent == "SWING_MISSED" then
 			self:MissEvent(dstGUID, AutoAttack, dstGUID == playerGUID and AutoAttack or ..., 6603)
@@ -554,10 +554,10 @@ function NameplateSCT:COMBAT_LOG_EVENT_UNFILTERED(_, _, clueevent, srcGUID, srcN
 	elseif bit.band(srcFlags, BITMASK_PETS) > 0 and bit.band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE) > 0 then -- Pet/Guardian events
 		if dstGUID ~= playerGUID and NameplateSCT.db.global.personal then
 			if damageSpellEvents[clueevent] then
-				local spellId, spellName, _, amount, _, _, _, _, _, critical, _, _ = ...
+				local _, spellId, spellName, _, amount, _, _, _, _, _, critical, _, _ = ...
 				self:DamageEvent(dstGUID, spellName, amount, "pet", critical, spellId)
 			elseif clueevent == "SWING_DAMAGE" then
-				local amount, _, _, _, _, _, critical, _, _ = ...
+				local _, amount, _, _, _, _, _, critical, _, _ = ...
 				self:DamageEvent(dstGUID, AutoAttack, amount, "pet", critical, 6603)
 			end
 		end
