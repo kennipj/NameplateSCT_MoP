@@ -1,4 +1,4 @@
-## Interface: 30300
+## Interface: 50400
 ## Title: NameplateSCT (|c00ffffffWoTLK|r)
 ## Notes: Nameplate-based scrolling combat text.
 ## Version: 1.8
@@ -9,7 +9,7 @@
 ## X-Credits: mpstark, Justwait
 ## X-Category: Combat
 ## X-Email: bkader@mail.com
-## X-Website: https://github.com/bkader/NameplateSCT_WoTLK
+## X-Website: https://github.com/kennipj/NameplateSCT_MoP
 ## X-Discord: https://discord.gg/a8z5CyS3eW
 ## X-Donate: |cff0079c1PayPal|r or |cff246a96Paysera|r at |cff20ff20bkader@mail.com|r
 
