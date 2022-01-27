@@ -3,7 +3,7 @@ This adds the same style of SCT to your personal frame or anchored to your scree
 
 ## Install
 
-1. [Download the package.](https://github.com/kennipj/NameplateSCT_MoP/releases/download/1.0/NameplateSCT.zip)
+1. [Download the package.](https://github.com/kennipj/NameplateSCT_MoP/releases/download/1.8.1/NameplateSCT.zip)
 2. Extract the single folder `NameplateSCT` to `Interface\AddOns`.
 3. Enjoy!
 
